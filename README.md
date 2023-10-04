@@ -53,9 +53,9 @@ The `control_system` function implements the control logic for the HVAC system. 
 ## Simulation
 
 The program simulates the HVAC system's behavior, including random fluctuations in temperature and adjustments to system components. You can choose to use random values for temperature fluctuations, specify specific values or use a PID controller to adjust the evaporating fan speed according to the difference between the desired temperature and the actual temperature uncommenting any of the following lines of code:
-//#define USE_RANDOM_VALUES
-//#define USE_SPECIFIC_VALUES
-//#define USE_PID
+- `//#define USE_RANDOM_VALUES`
+- `//#define USE_SPECIFIC_VALUES`
+- `//#define USE_PID`
 
 ## Saving Data
 
