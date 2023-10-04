@@ -2,7 +2,7 @@
  * main.h
  *
  *  Created on: 2 de oct. de 2023
- *      Author: Alfonso Fern·ndez SimÛn
+ *      Author: Alfonso Fern√°ndez Sim√≥n
  */
 
 #ifndef MAIN_H_
@@ -14,6 +14,32 @@
 #include <time.h>
 #include <stdbool.h>
 #include <unistd.h>
+
+// Different Use Options
+//#define USE_RANDOM_VALUES
+//#define USE_SPECIFIC_VALUES
+//#define USE_PID
+
+#ifdef USE_PID
+	#define KP 1.0
+	#define KI 0.1
+	#define KD 0.01
+	#define DT 1.0
+
+	typedef struct {
+		float error;
+		float integral;
+		float derivative;
+		float previous_error;
+	} pid_controller_t;
+
+	void init_pid_controller(pid_controller_t *pid) {
+		pid->error = 0.0;
+		pid->integral = 0.0;
+		pid->derivative = 0.0;
+		pid->previous_error = 0.0;
+	}
+#endif
 
 // Default Values
 #define DEFAULT_PRES 		5
@@ -66,6 +92,9 @@ typedef struct {
 } system_t;
 
 void init_system(system_t *system);
+#ifdef USE_PID
+	float update_pid(pid_controller_t *pid, float setpoint, float process_variable);
+#endif
 void control_system(system_t *system, float user_desired_temperature);
 float compare_values(float a, float b, float c);
 const char *stateToString(state_t state);
